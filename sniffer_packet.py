@@ -1,6 +1,16 @@
 import scapy.all as scapy
 from scapy.layers import http
 from urllib.parse import unquote
+import argparse
+
+def get_arguments():
+    parser.argparse.ArgumentParser()
+    parser.add_argument("-i", "--interface", dest="interface", help="interface for sniffing")
+    option=parser.parse_args()
+    if not option.interface:
+        parser.error("please write correct interface")
+    return option
+
 def sniff(interface):
     scapy.sniff(iface=interface, store=False, prn=process_sniffed_packet)
 
@@ -27,5 +37,5 @@ def process_sniffed_packet(packet):
 
 
 
-
-sniff("usb0")
+option=get_arguments
+sniff(option.interface)
